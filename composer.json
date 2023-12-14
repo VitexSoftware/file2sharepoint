@@ -1,0 +1,22 @@
+{
+    "name": "vitexsoftware/file2sharepoint",
+    "description": "Upload File to SharePoint",
+    "type": "project",
+    "require": {
+        "vgrem/php-spo": "dev-master",
+        "vitexsoftware/ease-core": "1.41"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "VitexSoftware\\File2SharePoint\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "CyberVitexus",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "minimum-stability": "dev"
+}

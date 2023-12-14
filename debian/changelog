@@ -1,0 +1,6 @@
+file2sharepoint (0.1.0) UNRELEASED; urgency=low
+
+  * Initial release. Closes: #nnnn
+    <nnnn is the bug number of your ITP>
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Thu, 14 Dec 2023 00:53:29 +0100

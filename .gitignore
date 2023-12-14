@@ -1,0 +1,4 @@
+/.env
+/tests/Settings.php
+/vendor/
+/data/

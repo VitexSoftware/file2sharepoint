@@ -1,0 +1,12 @@
+#!/bin/sh
+# postinst script for multiflexi-file2sharepoint
+set -e
+
+. /usr/share/debconf/confmodule
+
+APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
+# Iterate over all json files inf usr/lib/abraflexi-mailer/multiflexi
+for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
+do
+	multiflexi-json2app $file
+done

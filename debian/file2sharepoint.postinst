@@ -1,6 +1,8 @@
 #!/bin/sh
 set -e
 
+composer-debian file2sharepoint
+
 case "$1" in
     configure)
     ;;

@@ -6,7 +6,7 @@ declare(strict_types=1);
  * 
  *
  * @author     Vítězslav Dvořák <info@vitexsoftware.cz>
- * @copyright  2023 Vitex Software
+ * @copyright  2023-2024 Vitex Software
  */
 require_once '../vendor/autoload.php';
 
@@ -18,17 +18,16 @@ use Office365\SharePoint\ClientContext;
 define('APP_NAME', 'file2sharepoint');
 
 if ($argv == 0) {
-    echo $argv[0] . ' <source/files/path/*.*> <Sharepoint/folder/path/> [/path/to/config/.env] ' . "\n";
+    echo $argv[0] . ' <source/files/path/*.*> <Sharepoint/dest/folder/path/> [/path/to/config/.env] ' . "\n";
 } else {
-
-
     Shared::init([
 //    'OFFICE365_USERNAME',
 //    'OFFICE365_PASSWORD',
 //        'OFFICE365_CLIENTID',
 //        'OFFICE365_CLSECRET',
         'OFFICE365_TENANT',
-        'SHAREPOINT_LIBRARY',
+        'OFFICE365_SITE',
+//        'SHAREPOINT_LIBRARY',
             ], '../.env');
 
     if (Shared::cfg('OFFICE365_USERNAME', false) && Shared::cfg('OFFICE365_PASSWORD', false)) {
@@ -36,18 +35,18 @@ if ($argv == 0) {
     } else {
         $credentials = new ClientCredential(Shared::cfg('OFFICE365_CLIENTID'), Shared::cfg('OFFICE365_CLSECRET'));
     }
-    $ctx = (new ClientContext('https://' . Shared::cfg('OFFICE365_TENANT') . '.sharepoint.com'))->withCredentials($credentials);
-    $targetList = $ctx->getWeb()->getLists()->getByTitle(Shared::cfg('SHAREPOINT_LIBRARY', array_key_exists(2, $argv) ? $argv[2] : ''));
+
+    $ctx = (new ClientContext('https://' . Shared::cfg('OFFICE365_TENANT') . '.sharepoint.com/sites/'.Shared::cfg('OFFICE365_SITE')))->withCredentials($credentials);
+    $targetFolder = $ctx->getWeb()->getFolderByServerRelativeUrl(Shared::cfg('SHAREPOINT_LIBRARY', array_key_exists(2, $argv) ? $argv[2] : ''));
 
     foreach (glob($argv[1]) as $filename) {
-        $uploadFile = $targetList->getRootFolder()->uploadFile(basename($filename), file_get_contents($filename));
+        $uploadFile = $targetFolder->uploadFile(basename($filename), file_get_contents($filename));
         try {
             $ctx->executeQuery();
         } catch (Exception $exc) {
             fwrite(fopen('php://stderr', 'wb'), $exc->getMessage() . PHP_EOL);
             exit(1);
         }
-
         $fileUrl = $ctx->getBaseUrl() . '/_layouts/15/download.aspx?SourceUrl=' . urlencode($uploadFile->getServerRelativeUrl());
         print "{$fileUrl}" . PHP_EOL;
     }

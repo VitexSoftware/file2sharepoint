@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "93256f8d2453e83c40d2f576e513ceac",
+    "content-hash": "731f6411182bccb74420807303da4292",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -12,22 +12,22 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff"
+                "reference": "500501c2ce893c824c801da135d02661199f60c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/a49db6f0a5033aef5143295342f1c95521b075ff",
-                "reference": "a49db6f0a5033aef5143295342f1c95521b075ff",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/500501c2ce893c824c801da135d02661199f60c5",
+                "reference": "500501c2ce893c824c801da135d02661199f60c5",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4||^8.0"
+                "php": "^8.0"
             },
             "require-dev": {
-                "guzzlehttp/guzzle": "^6.5||^7.4",
+                "guzzlehttp/guzzle": "^7.4",
                 "phpspec/prophecy-phpunit": "^2.0",
                 "phpunit/phpunit": "^9.5",
-                "psr/cache": "^1.0||^2.0",
+                "psr/cache": "^2.0||^3.0",
                 "psr/http-client": "^1.0",
                 "psr/http-factory": "^1.0"
             },
@@ -66,9 +66,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.10.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.10.1"
             },
-            "time": "2023-12-01T16:26:39+00:00"
+            "time": "2024-05-18T18:05:11+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -127,12 +127,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail.git",
-                "reference": "4fda3292ac6bf226d8841cfd8ee3cf4e28395c01"
+                "reference": "eb053f8b74f4f3178105fcf001626e63068c0dbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Mail/zipball/4fda3292ac6bf226d8841cfd8ee3cf4e28395c01",
-                "reference": "4fda3292ac6bf226d8841cfd8ee3cf4e28395c01",
+                "url": "https://api.github.com/repos/pear/Mail/zipball/eb053f8b74f4f3178105fcf001626e63068c0dbc",
+                "reference": "eb053f8b74f4f3178105fcf001626e63068c0dbc",
                 "shasum": ""
             },
             "require": {
@@ -187,7 +187,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Mail",
                 "source": "https://github.com/pear/Mail"
             },
-            "time": "2023-11-01T21:31:59+00:00"
+            "time": "2024-01-15T21:56:23+00:00"
         },
         {
             "name": "pear/mail_mime",
@@ -195,12 +195,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail_Mime.git",
-                "reference": "895f9bea89417e963f321d2f27189d2ccd40592d"
+                "reference": "f5ecf88e0a45dcbe897f804cd882eb9667532cbd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Mail_Mime/zipball/895f9bea89417e963f321d2f27189d2ccd40592d",
-                "reference": "895f9bea89417e963f321d2f27189d2ccd40592d",
+                "url": "https://api.github.com/repos/pear/Mail_Mime/zipball/f5ecf88e0a45dcbe897f804cd882eb9667532cbd",
+                "reference": "f5ecf88e0a45dcbe897f804cd882eb9667532cbd",
                 "shasum": ""
             },
             "require": {
@@ -239,20 +239,20 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Mail_Mime",
                 "source": "https://github.com/pear/Mail_Mime"
             },
-            "time": "2023-12-10T12:44:33+00:00"
+            "time": "2024-04-01T08:15:26+00:00"
         },
         {
             "name": "pear/pear-core-minimal",
-            "version": "v1.10.14",
+            "version": "v1.10.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/pear-core-minimal.git",
-                "reference": "a86fc145edb5caedbf96527214ce3cadc9de4a32"
+                "reference": "ce0adade8b97561656ace07cdaac4751c271ea8c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/a86fc145edb5caedbf96527214ce3cadc9de4a32",
-                "reference": "a86fc145edb5caedbf96527214ce3cadc9de4a32",
+                "url": "https://api.github.com/repos/pear/pear-core-minimal/zipball/ce0adade8b97561656ace07cdaac4751c271ea8c",
+                "reference": "ce0adade8b97561656ace07cdaac4751c271ea8c",
                 "shasum": ""
             },
             "require": {
@@ -265,9 +265,9 @@
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "": "src/"
-                }
+                "classmap": [
+                    "src/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "include-path": [
@@ -288,7 +288,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=PEAR",
                 "source": "https://github.com/pear/pear-core-minimal"
             },
-            "time": "2023-11-26T16:15:38+00:00"
+            "time": "2024-03-16T18:41:45+00:00"
         },
         {
             "name": "pear/pear_exception",
@@ -352,16 +352,16 @@
         },
         {
             "name": "vgrem/php-spo",
-            "version": "dev-master",
+            "version": "v3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vgrem/phpSPO.git",
-                "reference": "e41cb803b4e725d174a08f77bb64fbfae0dca2e9"
+                "reference": "a3b445bde0d3a45ef71a2a0be6f9baf00864588e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vgrem/phpSPO/zipball/e41cb803b4e725d174a08f77bb64fbfae0dca2e9",
-                "reference": "e41cb803b4e725d174a08f77bb64fbfae0dca2e9",
+                "url": "https://api.github.com/repos/vgrem/phpSPO/zipball/a3b445bde0d3a45ef71a2a0be6f9baf00864588e",
+                "reference": "a3b445bde0d3a45ef71a2a0be6f9baf00864588e",
                 "shasum": ""
             },
             "require": {
@@ -376,7 +376,6 @@
             "require-dev": {
                 "phpunit/phpunit": "^9"
             },
-            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -403,9 +402,27 @@
             ],
             "support": {
                 "issues": "https://github.com/vgrem/phpSPO/issues",
-                "source": "https://github.com/vgrem/phpSPO/tree/master"
+                "source": "https://github.com/vgrem/phpSPO/tree/v3.1.2"
             },
-            "time": "2023-11-08T20:08:24+00:00"
+            "funding": [
+                {
+                    "url": "https://paypal.me/ossvgrem",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/[user1",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/user2",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/vgrem] # Replace with up to 4 GitHub Sponsors-enabled usernames e.g.",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-04-21T18:46:47+00:00"
         },
         {
             "name": "vitexsoftware/ease-core",
@@ -472,12 +489,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "vgrem/php-spo": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

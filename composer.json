@@ -3,7 +3,7 @@
     "description": "Upload File to SharePoint",
     "type": "project",
     "require": {
-        "vgrem/php-spo": "dev-master",
+        "vgrem/php-spo": "^3",
         "vitexsoftware/ease-core": "1.41"
     },
     "license": "MIT",

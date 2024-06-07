@@ -1,5 +1,2 @@
 #!/bin/bash
-php -f /usr/lib/file2sharepoint/file2sharepoint.php $@
-
-
-
+php -f /usr/lib/file2sharepoint/file2sharepoint.php -- $@

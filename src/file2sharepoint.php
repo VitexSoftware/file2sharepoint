@@ -17,7 +17,7 @@ use Office365\SharePoint\ClientContext;
 
 define('APP_NAME', 'file2sharepoint');
 
-if ($argv == 0) {
+if ($argc == 1) {
     echo $argv[0] . ' <source/files/path/*.*> <Sharepoint/dest/folder/path/> [/path/to/config/.env] ' . "\n";
 } else {
     Shared::init([
@@ -28,7 +28,7 @@ if ($argv == 0) {
         'OFFICE365_TENANT',
         'OFFICE365_SITE',
 //        'SHAREPOINT_LIBRARY',
-            ], '../.env');
+            ], array_key_exists(3, $argv) ? $argv[3] : '../.env');
 
     if (Shared::cfg('OFFICE365_USERNAME', false) && Shared::cfg('OFFICE365_PASSWORD', false)) {
         $credentials = new UserCredentials(Shared::cfg('OFFICE365_USERNAME'), Shared::cfg('OFFICE365_PASSWORD'));
@@ -36,7 +36,7 @@ if ($argv == 0) {
         $credentials = new ClientCredential(Shared::cfg('OFFICE365_CLIENTID'), Shared::cfg('OFFICE365_CLSECRET'));
     }
 
-    $ctx = (new ClientContext('https://' . Shared::cfg('OFFICE365_TENANT') . '.sharepoint.com/sites/'.Shared::cfg('OFFICE365_SITE')))->withCredentials($credentials);
+    $ctx = (new ClientContext('https://' . Shared::cfg('OFFICE365_TENANT') . '.sharepoint.com/sites/' . Shared::cfg('OFFICE365_SITE')))->withCredentials($credentials);
     $targetFolder = $ctx->getWeb()->getFolderByServerRelativeUrl(Shared::cfg('SHAREPOINT_LIBRARY', array_key_exists(2, $argv) ? $argv[2] : ''));
 
     foreach (glob($argv[1]) as $filename) {

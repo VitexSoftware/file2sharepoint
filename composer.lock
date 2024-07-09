@@ -127,12 +127,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/pear/Mail.git",
-                "reference": "eb053f8b74f4f3178105fcf001626e63068c0dbc"
+                "reference": "40028d27f67dd5b845a8b74ed6d678677d40bd5f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pear/Mail/zipball/eb053f8b74f4f3178105fcf001626e63068c0dbc",
-                "reference": "eb053f8b74f4f3178105fcf001626e63068c0dbc",
+                "url": "https://api.github.com/repos/pear/Mail/zipball/40028d27f67dd5b845a8b74ed6d678677d40bd5f",
+                "reference": "40028d27f67dd5b845a8b74ed6d678677d40bd5f",
                 "shasum": ""
             },
             "require": {
@@ -187,7 +187,7 @@
                 "issues": "http://pear.php.net/bugs/search.php?cmd=display&package_name[]=Mail",
                 "source": "https://github.com/pear/Mail"
             },
-            "time": "2024-01-15T21:56:23+00:00"
+            "time": "2024-06-10T05:29:41+00:00"
         },
         {
             "name": "pear/mail_mime",
@@ -494,5 +494,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

@@ -1,5 +1,6 @@
-/.env
+.env
 /tests/Settings.php
 /vendor/
 /data/
 /nbproject/
+/.build/

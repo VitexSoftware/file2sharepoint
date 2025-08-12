@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "vgrem/php-spo": "^3",
-        "vitexsoftware/ease-core": "1.41"
+        "vitexsoftware/ease-core": "1.48"
     },
     "license": "MIT",
     "autoload": {

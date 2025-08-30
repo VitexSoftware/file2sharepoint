@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "76808fa227f3811aa5cdb3bf81233714b799a5b5"
+                "reference": "f1748260d218a856b6a0c23715ac7fae1d7ca95b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/76808fa227f3811aa5cdb3bf81233714b799a5b5",
-                "reference": "76808fa227f3811aa5cdb3bf81233714b799a5b5",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/f1748260d218a856b6a0c23715ac7fae1d7ca95b",
+                "reference": "f1748260d218a856b6a0c23715ac7fae1d7ca95b",
                 "shasum": ""
             },
             "require": {
@@ -68,7 +68,7 @@
                 "issues": "https://github.com/firebase/php-jwt/issues",
                 "source": "https://github.com/firebase/php-jwt/tree/main"
             },
-            "time": "2024-08-07T18:22:50+00:00"
+            "time": "2025-08-19T15:14:18+00:00"
         },
         {
             "name": "pear/console_getopt",
@@ -352,16 +352,16 @@
         },
         {
             "name": "vgrem/php-spo",
-            "version": "v3.1.2",
+            "version": "v3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vgrem/phpSPO.git",
-                "reference": "a3b445bde0d3a45ef71a2a0be6f9baf00864588e"
+                "reference": "e7a28ee02c2d76457500de6f1a7f6121c16f224d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vgrem/phpSPO/zipball/a3b445bde0d3a45ef71a2a0be6f9baf00864588e",
-                "reference": "a3b445bde0d3a45ef71a2a0be6f9baf00864588e",
+                "url": "https://api.github.com/repos/vgrem/phpSPO/zipball/e7a28ee02c2d76457500de6f1a7f6121c16f224d",
+                "reference": "e7a28ee02c2d76457500de6f1a7f6121c16f224d",
                 "shasum": ""
             },
             "require": {
@@ -402,7 +402,7 @@
             ],
             "support": {
                 "issues": "https://github.com/vgrem/phpSPO/issues",
-                "source": "https://github.com/vgrem/phpSPO/tree/v3.1.2"
+                "source": "https://github.com/vgrem/phpSPO/tree/v3.2.0"
             },
             "funding": [
                 {
@@ -410,19 +410,11 @@
                     "type": "custom"
                 },
                 {
-                    "url": "https://github.com/[user1",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/user2",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/vgrem] # Replace with up to 4 GitHub Sponsors-enabled usernames e.g.",
+                    "url": "https://github.com/vgrem",
                     "type": "github"
                 }
             ],
-            "time": "2024-04-21T18:46:47+00:00"
+            "time": "2025-08-17T19:20:30+00:00"
         },
         {
             "name": "vitexsoftware/ease-core",

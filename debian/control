@@ -12,7 +12,7 @@ Rules-Requires-Root: no
 Package: file2sharepoint
 Architecture: any
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${shlibs:Depends},  composer-debian,
+Depends: ${misc:Depends}, ${shlibs:Depends},  composer-debian, php-vitexsoftware-ease-core
 Description: Simple Sharepoint file uploader
  Push your files to Sharepoint from command line
 

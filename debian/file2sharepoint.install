@@ -1,4 +1,5 @@
 
 bin/file2sharepoint usr/bin/
 src/file2sharepoint.php usr/lib/file2sharepoint/
-debian/composer.json usr/lib/file2sharepoint/
+debian/conf/composer.json usr/lib/file2sharepoint/
+

@@ -7,3 +7,10 @@
 
 %:
 	dh $@
+
+override_dh_install:
+	dh_install
+	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/file2sharepoint/g'   debian/file2sharepoint/usr/lib/file2sharepoint/*.php
+	sed -i -e 's/\.\.\/.env//g'  debian/file2sharepoint/usr/lib/file2sharepoint/*.php
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//' `'"'  debian/conf/composer.json |sponge debian/file2sharepoint/usr/lib/file2sharepoint/composer.json
+	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'  multiflexi/file2sharepoint.app.json |sponge debian/multiflexi-file2sharepoint/usr/lib/file2sharepoint/multiflexi/file2sharepoint.app.json

@@ -4,3 +4,6 @@
 /data/
 /nbproject/
 /.build/
+debian/.debhelper/
+debian/file2sharepoint/
+

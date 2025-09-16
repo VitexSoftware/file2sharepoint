@@ -1,2 +1,4 @@
 
-# You must remove unused comment lines for the released package.
+bin/file2sharepoint usr/bin/
+src/file2sharepoint.php usr/lib/file2sharepoint/
+debian/composer.json usr/lib/file2sharepoint/

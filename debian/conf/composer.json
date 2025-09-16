@@ -1,0 +1,30 @@
+{
+    "name": "vitexsoftware/file2sharepoint",
+    "description": "raiffeisenbank bank statement downloader for Stormware Pohoda",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vítězslav Dvořák",
+            "email": "info@vitexsoftware.cz"
+        }
+    ],
+    "require": {
+        "vgrem/php-spo": "^3",
+        "deb/ease-core": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "VitexSoftware\\File2SharePoint\\": "/usr/lib/file2sharepoint/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "/usr/share/php/EaseCore"
+        },
+        {
+            "type": "path",
+            "url": "/usr/share/php/GuzzleHttp"
+        }
+    ]
+}

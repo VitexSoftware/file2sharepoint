@@ -1,64 +1,70 @@
 {
-  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-  "name": "file2sharepoint",
-  "description": "Uploads files to SharePoint from local storage.",
-  "executable": "file2sharepoint",
-  "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
-  "arguments": [
-    {
-      "name": "source",
-      "type": "string",
-      "description": "Path to the local file or directory to upload.",
-      "required": true
-    },
-    {
-      "name": "destination",
-      "type": "string",
-      "description": "SharePoint destination path.",
-      "required": true
-    }
-  ],
-  "environment": {
-    "OFFICE365_USERNAME": {
-      "type": "string",
-      "description": "Office365 username for user authentication (used if present).",
-      "required": false
-    },
-    "OFFICE365_PASSWORD": {
-      "type": "string",
-      "description": "Office365 password for user authentication (used if present).",
-      "required": false
-    },
-    "OFFICE365_CLIENTID": {
-      "type": "string",
-      "description": "OAuth client ID for app authentication (used if username/password are not set).",
-      "required": false
-    },
-    "OFFICE365_CLSECRET": {
-      "type": "string",
-      "description": "OAuth client secret for app authentication (used if username/password are not set).",
-      "required": false
-    },
-    "OFFICE365_TENANT": {
-      "type": "string",
-      "description": "The tenant (subdomain) of the Office365/SharePoint site.",
-      "required": true
-    },
-    "OFFICE365_SITE": {
-      "type": "string",
-      "description": "The site name within the tenant.",
-      "required": true
-    },
-    "SHAREPOINT_LIBRARY": {
-      "type": "string",
-      "description": "The SharePoint library or folder path for file uploads.",
-      "required": false
-    }
-  },
-  "output": {
-    "type": "string",
-    "description": "Result of the upload operation."
-  },
-  "multiflexi": "1.25",
-  "author": "VitexSoftware"
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "name": "file2sharepoint",
+    "description": "Uploads files to SharePoint from local storage.",
+    "executable": "file2sharepoint",
+    "deploy": "apt install file2sharepoint",
+    "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
+    "requirements": ["Office365"],
+    "ociimage": "",
+    "topics": ["File", "Upload", "Sharepoint", "Office365"],
+    "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
+    "topics": 
+            "arguments": [
+            {
+            "name": "source",
+            "type": "string",
+            "description": "Path to the local file or directory to upload.",
+            "required": true
+        },
+        {
+        "name": "destination",
+                "type": "string",
+                "description": "SharePoint destination path.",
+                "required": true
+        }
+        ],
+        "environment": {
+        "OFFICE365_USERNAME": {
+        "type": "string",
+                "description": "Office365 username for user authentication (used if present).",
+                "required": false
+        },
+                "OFFICE365_PASSWORD": {
+                "type": "string",
+                        "description": "Office365 password for user authentication (used if present).",
+                        "required": false
+                },
+                "OFFICE365_CLIENTID": {
+                "type": "string",
+                        "description": "OAuth client ID for app authentication (used if username/password are not set).",
+                        "required": false
+                },
+                "OFFICE365_CLSECRET": {
+                "type": "string",
+                        "description": "OAuth client secret for app authentication (used if username/password are not set).",
+                        "required": false
+                },
+                "OFFICE365_TENANT": {
+                "type": "string",
+                        "description": "The tenant (subdomain) of the Office365/SharePoint site.",
+                        "required": true
+                },
+                "OFFICE365_SITE": {
+                "type": "string",
+                        "description": "The site name within the tenant.",
+                        "required": true
+                },
+                "SHAREPOINT_LIBRARY": {
+                "type": "string",
+                        "description": "The SharePoint library or folder path for file uploads.",
+                        "required": false
+                }
+        },
+        "output": {
+        "type": "string",
+                "description": "Result of the upload operation."
+        },
+        "multiflexi": "1.25",
+        "author": "VitexSoftware"
 }

@@ -3,6 +3,7 @@
   "name": "file2sharepoint",
   "description": "Uploads files to SharePoint from local storage.",
   "executable": "file2sharepoint",
+  "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
   "arguments": [
     {
       "name": "source",

@@ -1,5 +1,4 @@
 {
-  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
   "name": "file2sharepoint",
   "description": "Uploads files to SharePoint from local storage.",
   "executable": "file2sharepoint",

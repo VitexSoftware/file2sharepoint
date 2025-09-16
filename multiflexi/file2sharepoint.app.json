@@ -59,6 +59,6 @@
     "type": "string",
     "description": "Result of the upload operation."
   },
-  "version": "1.0.0",
+  "multiflexi": "1.25",
   "author": "VitexSoftware"
 }

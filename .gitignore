@@ -7,3 +7,10 @@
 debian/.debhelper/
 debian/file2sharepoint/
 
+debian/file2sharepoint.debhelper.log
+debian/debhelper-build-stamp
+debian/multiflexi-file2sharepoint.debhelper.log
+debian/multiflexi-file2sharepoint.substvars
+debian/multiflexi-file2sharepoint/
+debian/debhelper-build-stamp
+

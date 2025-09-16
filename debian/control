@@ -15,3 +15,9 @@ Multi-Arch: foreign
 Depends: ${misc:Depends}, ${shlibs:Depends},  composer-debian,
 Description: Simple Sharepoint file uploader
  Push your files to Sharepoint from command line
+
+Package: multiflexi-file2sharepoint
+Architecture: all
+Depends: ${misc:Depends}, file2sharepoint, multiflexi
+Description: add file2sharepoint to MultiFlexi
+ Allow use of file2sharepoint in MultiFlexi environment

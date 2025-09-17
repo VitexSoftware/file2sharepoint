@@ -103,3 +103,9 @@ distributions.each { distro ->
     }
 }
 parallel branches
+
+node {
+    stage('Publish to Aptly') {
+        publishDebToAptly()
+    }
+}

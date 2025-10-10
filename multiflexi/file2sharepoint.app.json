@@ -17,7 +17,6 @@
         "Office365"
     ],
     "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
-    "ociimage": "",
     "executable": "file2sharepoint",
     "environment": {
         "OFFICE365_USERNAME": {

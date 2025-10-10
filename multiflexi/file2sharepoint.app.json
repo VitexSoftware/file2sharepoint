@@ -1,86 +1,144 @@
 {
-  "name": "file2sharepoint",
-  "description": "Uploads files to SharePoint from local storage.",
-  "executable": "file2sharepoint",
-  "deploy": "apt install file2sharepoint",
-  "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
-  "requirements": ["Office365"],
-  "ociimage": "",
-  "topics": ["File", "Upload", "Sharepoint", "Office365"],
-  "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
-  "environment": {
-    "OFFICE365_USERNAME": {
-      "type": "text",
-      "description": "Office 365 Username",
-      "defval": "",
-      "required": false
+    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+    "schemaVersion": "3.0.0",
+    "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
+    "name": {
+        "en": "file2sharepoint",
+        "cs": "file2sharepoint"
     },
-    "OFFICE365_PASSWORD": {
-      "type": "password",
-      "description": "Office 365 Password",
-      "defval": "",
-      "required": false
+    "description": {
+        "en": "Uploads files to SharePoint from local storage.",
+        "cs": "Uploads files to SharePoint from local storage."
     },
-    "OFFICE365_CLIENTID": {
-      "type": "text",
-      "description": "Office 365 Client ID",
-      "defval": "",
-      "required": false
-    },
-    "OFFICE365_SECRET": {
-      "type": "text",
-      "description": "Office 365 Secret",
-      "defval": "",
-      "required": false
-    },
-    "OFFICE365_CLSECRET": {
-      "type": "text",
-      "description": "Office 365 Client Secret",
-      "defval": "",
-      "required": false
-    },
-    "OFFICE365_TENANT": {
-      "type": "text",
-      "description": "Office 365 Tenant",
-      "defval": "",
-      "required": true
-    },
-    "OFFICE365_SITE": {
-      "type": "text",
-      "description": "Office 365 Site",
-      "defval": "",
-      "required": true
-    },
-    "OFFICE365_PATH": {
-      "type": "text",
-      "description": "Office 365 Path",
-      "defval": "",
-      "required": true
-    },
-    "APP_DEBUG": {
-      "type": "bool",
-      "description": "Show debug messages",
-      "defval": "False",
-      "required": true
-    },
-    "RESULT_FILE": {
-      "type": "string",
-      "description": "write output json data to",
-      "defval": "bank_import_report_{ACCOUNT_NUMBER}.json",
-      "required": false
-    },
-    "ZABBIX_KEY": {
-      "type": "string",
-      "description": "Default name for Zabbix Item key name",
-      "defval": "Raiff-Import-{ACCOUNT_NUMBER}",
-      "required": false
-    },
-    "EASE_LOGGER": {
-      "type": "string",
-      "description": "write log messages using",
-      "defval": "console|syslog",
-      "required": false
+    "tags": [
+        "File",
+        "Upload",
+        "Sharepoint",
+        "Office365"
+    ],
+    "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
+    "ociimage": "",
+    "executable": "file2sharepoint",
+    "environment": {
+        "OFFICE365_USERNAME": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Username",
+                "cs": "Office 365 Username"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Other"
+        },
+        "OFFICE365_PASSWORD": {
+            "type": "password",
+            "description": {
+                "en": "Office 365 Password",
+                "cs": "Office 365 Password"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Security"
+        },
+        "OFFICE365_CLIENTID": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Client ID",
+                "cs": "Office 365 Client ID"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Other"
+        },
+        "OFFICE365_SECRET": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Secret",
+                "cs": "Office 365 Secret"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Security"
+        },
+        "OFFICE365_CLSECRET": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Client Secret",
+                "cs": "Office 365 Client Secret"
+            },
+            "defval": "",
+            "required": false,
+            "category": "Security"
+        },
+        "OFFICE365_TENANT": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Tenant",
+                "cs": "Office 365 Tenant"
+            },
+            "defval": "",
+            "required": true,
+            "category": "Other"
+        },
+        "OFFICE365_SITE": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Site",
+                "cs": "Office 365 Site"
+            },
+            "defval": "",
+            "required": true,
+            "category": "Other"
+        },
+        "OFFICE365_PATH": {
+            "type": "text",
+            "description": {
+                "en": "Office 365 Path",
+                "cs": "Office 365 Path"
+            },
+            "defval": "",
+            "required": true,
+            "category": "Other"
+        },
+        "APP_DEBUG": {
+            "type": "bool",
+            "description": {
+                "en": "Show debug messages",
+                "cs": "Show debug messages"
+            },
+            "defval": "False",
+            "required": true,
+            "category": "Behavior"
+        },
+        "RESULT_FILE": {
+            "type": "string",
+            "description": {
+                "en": "write output json data to",
+                "cs": "write output json data to"
+            },
+            "defval": "bank_import_report_{ACCOUNT_NUMBER}.json",
+            "required": false,
+            "category": "Other"
+        },
+        "ZABBIX_KEY": {
+            "type": "string",
+            "description": {
+                "en": "Default name for Zabbix Item key name",
+                "cs": "Default name for Zabbix Item key name"
+            },
+            "defval": "Raiff-Import-{ACCOUNT_NUMBER}",
+            "required": false,
+            "category": "Other"
+        },
+        "EASE_LOGGER": {
+            "type": "string",
+            "description": {
+                "en": "write log messages using",
+                "cs": "write log messages using"
+            },
+            "defval": "console|syslog",
+            "required": false,
+            "category": "Behavior"
+        }
     }
-  },
-  "multiflexi": "1.25"
 }

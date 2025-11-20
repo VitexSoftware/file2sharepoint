@@ -54,3 +54,10 @@ OFFICE365_PATH='Shared documents/files'
 ```
 
 Into configuration file .env please put ClientID **OR** Login/Password values. 
+
+## Exit Codes
+
+This application uses the following exit codes:
+
+- `0`: Success
+- `1`: General error

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="console-application">
+  <id>io.github.vitexsoftware.file2sharepoint</id>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <name>file2sharepoint</name>
+  <summary>Simple Sharepoint file uploader</summary>
+  <description>
+    <p>
+      Push your files to Sharepoint from command line Allow use of file2sharepoint in MultiFlexi environment
+    </p>
+  </description>
+  <categories>
+    <category>System</category>
+    <category>ConsoleOnly</category>
+  </categories>
+  <url type="homepage">https://github.com/VitexSoftware/file2sharepoint</url>
+  <url type="bugtracker">https://github.com/VitexSoftware/file2sharepoint/issues</url>
+  <developer id="cz.vitexsoftware">
+    <name>VitexSoftware</name>
+  </developer>
+  <provides>
+    <binary>file2sharepoint</binary>
+  </provides>
+  <content_rating type="oars-1.1"/>
+</component>

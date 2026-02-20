@@ -4,7 +4,7 @@
     "type": "project",
     "require": {
         "vgrem/php-spo": "^3",
-        "vitexsoftware/ease-core": "1.49.0"
+        "vitexsoftware/ease-core": "1.50.1"
     },
     "license": "MIT",
     "autoload": {
@@ -23,7 +23,7 @@
         "phpstan/phpstan": "*",
         "friendsofphp/php-cs-fixer": "^3.92",
         "ergebnis/composer-normalize": "^2.48",
-        "ergebnis/php-cs-fixer-config": "^6.58"
+        "ergebnis/php-cs-fixer-config": "^6.59"
     },
     "minimum-stability": "dev",
     "config": {

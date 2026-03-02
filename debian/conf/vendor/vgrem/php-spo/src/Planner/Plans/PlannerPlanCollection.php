@@ -1,0 +1,51 @@
+<?php
+
+namespace Office365\Planner\Plans;
+
+
+use Office365\EntityCollection;
+use Office365\Runtime\ClientRuntimeContext;
+use Office365\Runtime\ResourcePath;
+
+class PlannerPlanCollection extends EntityCollection {
+
+    public function __construct(ClientRuntimeContext $ctx, ?ResourcePath $resourcePath = null, $parent=null)
+    {
+        parent::__construct($ctx, $resourcePath, PlannerPlan::class, $parent);
+    }
+
+    /**
+     * Create a new plannerPlan object.
+     * Note: If the container is a Microsoft 365 group, the user who creates the plan must be a member of the group
+     * that contains the plan. When you create a new group by using Create group, you aren't added to the group
+     * as a member. After the group is created, add yourself as a member by using group post members.
+     * @param $title
+     * @return PlannerPlan
+     */
+    public function create($title){
+        /** @var PlannerPlan $returnType */
+        $returnType = $this->getContext()->getPlanner()->getPlans()->add();
+        $returnType->setTitle($title);
+        $returnType->setProperty("container", $this->getContainer());
+        return $returnType;
+    }
+
+    /**
+     * Returns the container of the plan.
+     * @return array
+     */
+    public function getContainer()
+    {
+        if ($this->getParent() === null) {
+            throw new \RuntimeException("Parent resource is not available");
+        }
+        $resourceUrl = $this->getParent()->getResourceUrl();
+
+        if (str_ends_with($resourceUrl, '/Planner')) {
+            $resourceUrl = substr($resourceUrl, 0, -8);
+        }
+
+        return ["url" => $resourceUrl];
+    }
+
+}

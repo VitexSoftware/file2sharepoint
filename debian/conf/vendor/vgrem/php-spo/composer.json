@@ -1,0 +1,41 @@
+{
+    "name": "vgrem/php-spo",
+    "description": "PHP Office 365 library. It allows to performs CRUD operations against Office 365 resources via an REST/OData based API",
+    "type": "library",
+    "keywords": [
+        "office365",
+        "microsoftgraph",
+        "rest",
+        "curl",
+        "api"
+    ],
+    "authors": [
+        {
+            "name": "Vadim Gremyachev",
+            "email": "vvgrem@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-simplexml": "*",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "firebase/php-jwt": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Office365\\": ["tests/", "tests/common/", "tests/sharepoint/", "tests/onenote/", "tests/onedrive/", "tests/outlookservices/", "tests/directory/", "tests/teams/", "tests/reports/", "tests/planner/"]
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Office365\\": "src/"
+        }
+    }
+}

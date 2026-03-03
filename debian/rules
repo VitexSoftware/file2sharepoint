@@ -6,11 +6,41 @@
 #export DEB_LDFLAGS_MAINT_APPEND = -Wl,--as-needed
 
 %:
-	dh $@
+	dh $@ --with phpcomposer
+
+override_dh_auto_build:
+	# Generate Debian autoloader for file2sharepoint
+	cat > debian/autoload.php <<'AUTOLOADER'
+<?php
+// Debian autoloader for file2sharepoint
+// Load dependency autoloaders
+require_once '/usr/share/php/Ease/autoload.php';
+require_once '/usr/share/php/Office365/SharePoint/autoload.php';
+
+// PSR-4 autoloader for application classes
+spl_autoload_register(function (string $$class): void {
+    $$prefixes = [
+        'VitexSoftware\\File2SharePoint\\' => '/usr/lib/file2sharepoint/src/',
+    ];
+    foreach ($$prefixes as $$prefix => $$baseDir) {
+        $$len = strlen($$prefix);
+        if (strncmp($$prefix, $$class, $$len) !== 0) {
+            continue;
+        }
+        $$relativeClass = substr($$class, $$len);
+        $$file = $$baseDir . str_replace('\\', '/', $$relativeClass) . '.php';
+        if (file_exists($$file)) {
+            require $$file;
+            return;
+        }
+    }
+});
+AUTOLOADER
 
 override_dh_install:
 	dh_install
-	sed -i -e 's/..\/vendor/\/var\/lib\/composer\/file2sharepoint/g'   debian/file2sharepoint/usr/lib/file2sharepoint/*.php
+	install -D -m 0644 debian/autoload.php debian/file2sharepoint/usr/share/php/file2sharepoint/autoload.php
+	sed -i -e 's/..\/..\/vendor/\/usr\/share\/php\/file2sharepoint/g'   debian/file2sharepoint/usr/lib/file2sharepoint/*.php
 	sed -i -e 's/\.\.\/.env//g'  debian/file2sharepoint/usr/lib/file2sharepoint/*.php
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//' `'"'  debian/conf/composer.json |sponge debian/file2sharepoint/usr/lib/file2sharepoint/composer.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'   multiflexi/file2sharepoint.app.json |sponge debian/multiflexi-file2sharepoint/usr/lib/file2sharepoint/multiflexi/file2sharepoint.app.json

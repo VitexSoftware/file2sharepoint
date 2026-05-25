@@ -8,5 +8,9 @@ APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
 # Iterate over all json files inf usr/lib/abraflexi-mailer/multiflexi
 for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
 do
-	multiflexi-json2app $file
+	if command -v multiflexi-json2app > /dev/null 2>&1; then
+		multiflexi-json2app $file
+	else
+		echo "multiflexi-json2app not found, skipping app registration for $file"
+	fi
 done

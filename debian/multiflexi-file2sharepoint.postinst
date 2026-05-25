@@ -5,12 +5,12 @@ set -e
 . /usr/share/debconf/confmodule
 
 APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
-# Iterate over all json files inf usr/lib/abraflexi-mailer/multiflexi
+# Iterate over all json files in /usr/lib/$APPLICATION/multiflexi
 for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
 do
-	if command -v multiflexi-json2app > /dev/null 2>&1; then
-		multiflexi-json2app $file
+	if command -v multiflexi-cli > /dev/null 2>&1; then
+		multiflexi-cli application:import-json --file=$file
 	else
-		echo "multiflexi-json2app not found, skipping app registration for $file"
+		echo "multiflexi-cli not found, skipping app registration for $file"
 	fi
 done

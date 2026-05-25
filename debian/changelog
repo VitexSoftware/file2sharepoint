@@ -1,3 +1,24 @@
+file2sharepoint (0.2.0) stable; urgency=medium
+
+  * Fix glob/file_get_contents return-value checks with proper stderr output
+  * Catch \Throwable instead of Exception in upload error handler
+  * Fix STDERR: use STDERR constant instead of fopen php://stderr
+  * Fix debian/autoload.php: remove double-dollar variable-variable bug
+  * Fix debian/rules: correct sed pattern ../vendor (was ../../vendor)
+  * Fix bin/file2sharepoint: quote "$@" to preserve arguments with spaces
+  * Fix .php-cs-fixer.dist.php: correct package name (was CSas Statement Tools)
+  * Add OFFICE365_SITE to .env.example
+  * Fix README: remove non-existent OFFICE365_SECRET, rename OFFICE365_PATH
+    to SHAREPOINT_LIBRARY, fix typo yourcomapny -> yourcompany
+  * Update multiflexi/file2sharepoint.app.json: remove stale OFFICE365_SECRET
+    and OFFICE365_PATH vars, add SHAREPOINT_LIBRARY, remove copy-pasted
+    RESULT_FILE/ZABBIX_KEY fields, fix APP_DEBUG required/defval, add Czech
+    translations, regroup categories
+  * Rename WARP.md to AGENTS.md
+  * Add phpunit.xml.dist and initial test suite
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Sun, 25 May 2026 00:00:00 +0200
+
 file2sharepoint (0.1.0) UNRELEASED; urgency=low
 
   * Initial release. Closes: #nnnn

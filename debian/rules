@@ -14,7 +14,7 @@ override_dh_auto_build:
 override_dh_install:
 	dh_install
 	install -D -m 0644 debian/autoload.php debian/file2sharepoint/usr/share/php/file2sharepoint/autoload.php
-	sed -i -e 's/..\/..\/vendor/\/usr\/share\/php\/file2sharepoint/g'   debian/file2sharepoint/usr/lib/file2sharepoint/*.php
+	sed -i -e 's/..\/vendor/\/usr\/share\/php\/file2sharepoint/g'   debian/file2sharepoint/usr/lib/file2sharepoint/*.php
 	sed -i -e 's/\.\.\/.env//g'  debian/file2sharepoint/usr/lib/file2sharepoint/*.php
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//' `'"'  debian/conf/composer.json |sponge debian/file2sharepoint/usr/lib/file2sharepoint/composer.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'   multiflexi/file2sharepoint.app.json |sponge debian/multiflexi-file2sharepoint/usr/lib/file2sharepoint/multiflexi/file2sharepoint.app.json

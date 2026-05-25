@@ -22,5 +22,6 @@
   <provides>
     <binary>file2sharepoint</binary>
   </provides>
+  <icon type="stock">io.github.vitexsoftware.file2sharepoint</icon>
   <content_rating type="oars-1.1"/>
 </component>

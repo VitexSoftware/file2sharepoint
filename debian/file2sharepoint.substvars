@@ -1,2 +1,6 @@
+phpcomposer:name=vitexsoftware/file2sharepoint
+phpcomposer:description=Upload File to SharePoint
+phpcomposer:Debian-require=php-common, php-vgrem-php-spo (>= 3), php-vgrem-php-spo (<< 4~~), php-vitexsoftware-ease-core (= 1.50.1)
+phpcomposer:Debian-require-dev=phpunit, php-phpstan, php-friendsofphp-php-cs-fixer (>= 3.92), php-friendsofphp-php-cs-fixer (<< 4~~), php-ergebnis-composer-normalize (>= 2.48), php-ergebnis-composer-normalize (<< 3~~), php-ergebnis-php-cs-fixer-config (>= 6.62), php-ergebnis-php-cs-fixer-config (<< 7~~)
 misc:Depends=
 misc:Pre-Depends=

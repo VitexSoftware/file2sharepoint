@@ -8,7 +8,7 @@
     },
     "description": {
         "en": "Uploads files to SharePoint from local storage.",
-        "cs": "Uploads files to SharePoint from local storage."
+        "cs": "Nahrává soubory do SharePointu z lokálního úložiště."
     },
     "tags": [
         "File",
@@ -22,118 +22,88 @@
         "OFFICE365_USERNAME": {
             "type": "text",
             "description": {
-                "en": "Office 365 Username",
-                "cs": "Office 365 Username"
+                "en": "Office 365 username (user authentication)",
+                "cs": "Uživatelské jméno Office 365 (přihlášení uživatelem)"
             },
             "defval": "",
             "required": false,
-            "category": "Other"
+            "category": "Authentication"
         },
         "OFFICE365_PASSWORD": {
             "type": "password",
             "description": {
-                "en": "Office 365 Password",
-                "cs": "Office 365 Password"
+                "en": "Office 365 password (user authentication)",
+                "cs": "Heslo Office 365 (přihlášení uživatelem)"
             },
             "defval": "",
             "required": false,
-            "category": "Security"
+            "category": "Authentication"
         },
         "OFFICE365_CLIENTID": {
             "type": "text",
             "description": {
-                "en": "Office 365 Client ID",
-                "cs": "Office 365 Client ID"
+                "en": "Office 365 application Client ID (client credentials authentication)",
+                "cs": "ID klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
             },
             "defval": "",
             "required": false,
-            "category": "Other"
-        },
-        "OFFICE365_SECRET": {
-            "type": "text",
-            "description": {
-                "en": "Office 365 Secret",
-                "cs": "Office 365 Secret"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Security"
+            "category": "Authentication"
         },
         "OFFICE365_CLSECRET": {
-            "type": "text",
+            "type": "password",
             "description": {
-                "en": "Office 365 Client Secret",
-                "cs": "Office 365 Client Secret"
+                "en": "Office 365 application Client Secret (client credentials authentication)",
+                "cs": "Tajný klíč klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
             },
             "defval": "",
             "required": false,
-            "category": "Security"
+            "category": "Authentication"
         },
         "OFFICE365_TENANT": {
             "type": "text",
             "description": {
-                "en": "Office 365 Tenant",
-                "cs": "Office 365 Tenant"
+                "en": "Office 365 tenant name (e.g. yourcompany for yourcompany.sharepoint.com)",
+                "cs": "Název tenanta Office 365 (např. vasefirma pro vasefirma.sharepoint.com)"
             },
             "defval": "",
             "required": true,
-            "category": "Other"
+            "category": "Connection"
         },
         "OFFICE365_SITE": {
             "type": "text",
             "description": {
-                "en": "Office 365 Site",
-                "cs": "Office 365 Site"
+                "en": "SharePoint site name",
+                "cs": "Název webu SharePoint"
             },
             "defval": "",
             "required": true,
-            "category": "Other"
+            "category": "Connection"
         },
-        "OFFICE365_PATH": {
+        "SHAREPOINT_LIBRARY": {
             "type": "text",
             "description": {
-                "en": "Office 365 Path",
-                "cs": "Office 365 Path"
+                "en": "Destination folder path in SharePoint (e.g. Shared documents/uploads)",
+                "cs": "Cílová složka v SharePointu (např. Sdílené dokumenty/nahráváni)"
             },
-            "defval": "",
-            "required": true,
-            "category": "Other"
+            "defval": "Documents",
+            "required": false,
+            "category": "Connection"
         },
         "APP_DEBUG": {
             "type": "bool",
             "description": {
                 "en": "Show debug messages",
-                "cs": "Show debug messages"
+                "cs": "Zobrazit ladicí zprávy"
             },
-            "defval": "False",
-            "required": true,
+            "defval": "false",
+            "required": false,
             "category": "Behavior"
-        },
-        "RESULT_FILE": {
-            "type": "string",
-            "description": {
-                "en": "write output json data to",
-                "cs": "write output json data to"
-            },
-            "defval": "bank_import_report_{ACCOUNT_NUMBER}.json",
-            "required": false,
-            "category": "Other"
-        },
-        "ZABBIX_KEY": {
-            "type": "string",
-            "description": {
-                "en": "Default name for Zabbix Item key name",
-                "cs": "Default name for Zabbix Item key name"
-            },
-            "defval": "Raiff-Import-{ACCOUNT_NUMBER}",
-            "required": false,
-            "category": "Other"
         },
         "EASE_LOGGER": {
             "type": "string",
             "description": {
-                "en": "write log messages using",
-                "cs": "write log messages using"
+                "en": "Log output targets (e.g. console|syslog)",
+                "cs": "Cíle výstupu logu (např. console|syslog)"
             },
             "defval": "console|syslog",
             "required": false,

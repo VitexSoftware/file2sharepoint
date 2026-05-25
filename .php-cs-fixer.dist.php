@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the CSas Statement Tools package
+ * This file is part of the file2sharepoint package
  *
  * https://github.com/VitexSoftware/file2sharepoint
  *
@@ -18,7 +18,7 @@ use Ergebnis\PhpCsFixer\Config\Rules;
 use Ergebnis\PhpCsFixer\Config\RuleSet\Php81;
 
 $header = <<<'HEADER'
-This file is part of the CSas Statement Tools package
+This file is part of the file2sharepoint package
 
 https://github.com/VitexSoftware/file2sharepoint
 

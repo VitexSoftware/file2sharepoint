@@ -1,4 +1,4 @@
-# WARP.md - Working AI Reference for file2sharepoint
+# AGENTS.md - Working AI Reference for file2sharepoint
 
 ## Project Overview
 **Type**: PHP Project/Debian Package

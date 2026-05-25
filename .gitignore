@@ -14,3 +14,5 @@ debian/multiflexi-file2sharepoint.substvars
 debian/multiflexi-file2sharepoint/
 debian/debhelper-build-stamp
 
+debian/file2sharepoint.substvars
+debian/debhelper-build-stamp

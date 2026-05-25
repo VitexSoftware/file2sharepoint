@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 /**
- * This file is part of the CSas Statement Tools package
+ * This file is part of the file2sharepoint package
  *
  * https://github.com/VitexSoftware/file2sharepoint
  *
@@ -48,18 +48,34 @@ if ($argc === 1) {
 
     $targetFolder = $ctx->getWeb()->getFolderByServerRelativeUrl(Shared::cfg('SHAREPOINT_LIBRARY', \array_key_exists(2, $argv) ? $argv[2] : ''));
 
-    foreach (glob($argv[1]) as $filename) {
-        $uploadFile = $targetFolder->uploadFile(basename($filename), file_get_contents($filename));
+    $files = \glob($argv[1]);
 
-        try {
-            $ctx->executeQuery();
-        } catch (Exception $exc) {
-            fwrite(fopen('php://stderr', 'wb'), $exc->getMessage().\PHP_EOL);
+    if ($files === false || $files === []) {
+        \fwrite(\STDERR, 'No files matched: '.$argv[1].\PHP_EOL);
+
+        exit(1);
+    }
+
+    foreach ($files as $filename) {
+        $contents = \file_get_contents($filename);
+
+        if ($contents === false) {
+            \fwrite(\STDERR, 'Cannot read file: '.$filename.\PHP_EOL);
 
             exit(1);
         }
 
-        $fileUrl = $ctx->getBaseUrl().'/_layouts/15/download.aspx?SourceUrl='.urlencode($uploadFile->getServerRelativeUrl());
+        $uploadFile = $targetFolder->uploadFile(\basename($filename), $contents);
+
+        try {
+            $ctx->executeQuery();
+        } catch (\Throwable $exc) {
+            \fwrite(\STDERR, $exc->getMessage().\PHP_EOL);
+
+            exit(1);
+        }
+
+        $fileUrl = $ctx->getBaseUrl().'/_layouts/15/download.aspx?SourceUrl='.\urlencode($uploadFile->getServerRelativeUrl());
         echo "{$fileUrl}".\PHP_EOL;
     }
 }

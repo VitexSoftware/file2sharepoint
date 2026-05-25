@@ -8,9 +8,5 @@ APPLICATION=`echo $DPKG_MAINTSCRIPT_PACKAGE | sed 's/multiflexi-//'`
 # Iterate over all json files in /usr/lib/$APPLICATION/multiflexi
 for file in `ls /usr/lib/$APPLICATION/multiflexi/*.json`
 do
-	if command -v multiflexi-cli > /dev/null 2>&1; then
-		multiflexi-cli application:import-json --file=$file
-	else
-		echo "multiflexi-cli not found, skipping app registration for $file"
-	fi
+	multiflexi-cli application:import-json --file=$file
 done

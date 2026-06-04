@@ -27,7 +27,7 @@
             },
             "defval": "",
             "required": false,
-            "category": "Authentication"
+            "category": "Security"
         },
         "OFFICE365_PASSWORD": {
             "type": "password",
@@ -37,7 +37,7 @@
             },
             "defval": "",
             "required": false,
-            "category": "Authentication"
+            "category": "Security"
         },
         "OFFICE365_CLIENTID": {
             "type": "text",
@@ -47,7 +47,7 @@
             },
             "defval": "",
             "required": false,
-            "category": "Authentication"
+            "category": "Security"
         },
         "OFFICE365_CLSECRET": {
             "type": "password",
@@ -57,7 +57,7 @@
             },
             "defval": "",
             "required": false,
-            "category": "Authentication"
+            "category": "Security"
         },
         "OFFICE365_TENANT": {
             "type": "text",
@@ -67,7 +67,7 @@
             },
             "defval": "",
             "required": true,
-            "category": "Connection"
+            "category": "API"
         },
         "OFFICE365_SITE": {
             "type": "text",
@@ -77,7 +77,7 @@
             },
             "defval": "",
             "required": true,
-            "category": "Connection"
+            "category": "API"
         },
         "SHAREPOINT_LIBRARY": {
             "type": "text",
@@ -87,7 +87,7 @@
             },
             "defval": "Documents",
             "required": false,
-            "category": "Connection"
+            "category": "API"
         },
         "APP_DEBUG": {
             "type": "bool",

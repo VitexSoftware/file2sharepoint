@@ -40,7 +40,7 @@ class File2SharepointTest extends TestCase
             ['php', basename(self::$script)],
             [1 => ['pipe', 'w'], 2 => ['pipe', 'w']],
             $pipes,
-            dirname(self::$script),
+            \dirname(self::$script),
         );
         self::assertIsResource($proc);
         $stdout = stream_get_contents($pipes[1]);

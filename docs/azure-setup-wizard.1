@@ -1,0 +1,169 @@
+.TH AZURE-SETUP-WIZARD 1 "June 2026" "file2sharepoint 0.2.0" "User Commands"
+.SH NAME
+azure-setup-wizard \- interactive wizard to configure Azure / SharePoint credentials for file2sharepoint
+.SH SYNOPSIS
+.B azure-setup-wizard
+.RI [ /path/to/.env ]
+.SH DESCRIPTION
+.B azure-setup-wizard
+is an interactive Bash wizard that guides the user through creating or
+updating the
+.I .env
+configuration file used by
+.BR file2sharepoint (1).
+.PP
+When the
+.B az
+(Azure CLI) tool is available and client-credentials mode is chosen, the
+wizard automates the full Azure App Registration process:
+.IP \(bu 4
+Creates an Azure AD Application and Service Principal.
+.IP \(bu 4
+Assigns the SharePoint
+.I AllSites.Write
+application permission
+.RB ( 00000003-0000-0ff1-ce00-000000000000 ).
+.IP \(bu 4
+Attempts to grant tenant-wide admin consent (requires Global Administrator).
+.IP \(bu 4
+Generates a client secret (valid for 2 years).
+.PP
+If
+.B az
+is not installed, the wizard falls back to prompting for credentials that
+were configured manually in the Azure Portal.
+.PP
+When a
+.I .env
+file already exists its values are pre-filled as defaults and a backup is
+written to
+.IR .env.bak .
+.SH ARGUMENTS
+.TP
+.I /path/to/.env
+Path to the configuration file to create or update.
+Defaults to
+.I .env
+in the project root (one level above the
+.I bin/
+directory).
+.SH INTERACTIVE PROMPTS
+The wizard walks through the following sections in order:
+.SS "SharePoint Destination"
+.TP
+.B OFFICE365_TENANT
+Azure AD / SharePoint tenant name (e.g.\&
+.IR yourcompany
+for
+.IR yourcompany.sharepoint.com ).
+.TP
+.B OFFICE365_SITE
+SharePoint site collection name (e.g.\&
+.IR TeamSite ).
+.TP
+.B SHAREPOINT_LIBRARY
+Destination library or folder path inside the site
+(e.g.\&
+.IR "Documents"
+or
+.IR "Shared Documents/uploads" ).
+Default:
+.IR Documents .
+.SS "Authentication Method"
+.TP
+.B 1 \(em App registration (default)
+Creates or re-uses an Azure App Registration.
+Requires the
+.B az
+CLI or manual entry of an existing Client ID and Secret.
+.TP
+.B 2 \(em User credentials
+Prompts for an Office\~365 username and password.
+Legacy authentication may be disabled by Conditional Access policies.
+.SS "App Registration (client-credentials mode only)"
+.TP
+App display name
+Defaults to
+.IR file2sharepoint-<OFFICE365_SITE> .
+.TP
+Re-use existing app?
+If an app with the same display name already exists the wizard offers to
+re-use it and generate a new secret instead of creating a duplicate.
+.TP
+Admin consent
+Attempted automatically via
+.BR "az ad app permission admin-consent" .
+If the current account lacks Global Administrator privileges a portal URL is
+printed and the wizard pauses until the user confirms consent has been granted.
+.SH OUTPUT
+On success the wizard writes the
+.I .env
+file with mode
+.B 600
+(owner read/write only) and prints the Azure Portal URL of the created App
+Registration.
+.SH ENVIRONMENT
+.TP
+.B HOME
+Used to locate
+.B az
+CLI credentials cached by
+.BR "az login" .
+.SH FILES
+.TP
+.I .env
+Configuration file written by the wizard.
+.TP
+.I .env.bak
+Backup of the previous
+.I .env
+file (created if one already exists).
+.SH REQUIRED AZURE PERMISSION
+.TS
+l l.
+Resource	SharePoint (00000003-0000-0ff1-ce00-000000000000)
+Role	AllSites.Write (1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9)
+Type	Application (not Delegated)
+Consent	Tenant-wide admin consent required
+.TE
+.SH EXAMPLES
+Run the wizard and write credentials to the default project
+.IR .env :
+.PP
+.RS 4
+.EX
+azure-setup-wizard
+.EE
+.RE
+.PP
+Write credentials to a system-wide location:
+.PP
+.RS 4
+.EX
+azure-setup-wizard /etc/file2sharepoint/.env
+.EE
+.RE
+.PP
+Via the project Makefile shorthand:
+.PP
+.RS 4
+.EX
+make setup-wizard
+.EE
+.RE
+.SH SEE ALSO
+.BR file2sharepoint (1),
+.BR az (1)
+.PP
+Azure CLI installation:
+.UR https://learn.microsoft.com/en-us/cli/azure/install-azure-cli
+.UE
+.PP
+Azure App Registration documentation:
+.UR https://learn.microsoft.com/en-us/azure/active-directory/develop/quickstart-register-app
+.UE
+.SH AUTHOR
+Vítězslav Dvořák <info@vitexsoftware.cz>
+.br
+.UR https://github.com/VitexSoftware/file2sharepoint
+.UE

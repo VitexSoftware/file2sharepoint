@@ -1,0 +1,122 @@
+.TH FILE2SHAREPOINT 1 "June 2026" "file2sharepoint 0.2.0" "User Commands"
+.SH NAME
+file2sharepoint \- upload local files to Microsoft SharePoint and print the resulting URL
+.SH SYNOPSIS
+.B file2sharepoint
+.I "source/path/glob"
+.I "SharePoint/dest/folder"
+.RI [ /path/to/.env ]
+.SH DESCRIPTION
+.B file2sharepoint
+uploads one or more local files (matched by a shell glob pattern) to a
+Microsoft SharePoint document library and prints the download URL of each
+uploaded file to standard output.
+.PP
+Authentication credentials and destination settings are read from a
+.I .env
+configuration file.
+Use
+.BR azure-setup-wizard (1)
+to create and populate that file.
+.SH ARGUMENTS
+.TP
+.I source/path/glob
+Shell glob expression that matches the local files to upload (e.g.\&
+.IR /tmp/reports/*.pdf ).
+Must be quoted when it contains wildcards.
+.TP
+.I SharePoint/dest/folder
+Server-relative path of the destination folder inside the SharePoint site
+(e.g.\&
+.IR "Documents/uploads" ).
+Overridden by the
+.B SHAREPOINT_LIBRARY
+environment variable if set.
+.TP
+.I /path/to/.env
+Optional path to the
+.I .env
+configuration file.
+Defaults to
+.I ../.env
+relative to the script location (i.e.\& the project root when running from
+.IR src/ ).
+.SH CONFIGURATION
+Credentials are supplied through environment variables, typically loaded from a
+.I .env
+file.
+.SS "Required"
+.TP
+.B OFFICE365_TENANT
+Azure AD / SharePoint tenant name (the subdomain part of
+.IR "yourcompany.sharepoint.com" ).
+.TP
+.B OFFICE365_SITE
+Name of the SharePoint site collection.
+.SS "Required \(em choose one authentication method"
+.TP
+.BR OFFICE365_CLIENTID " and " OFFICE365_CLSECRET
+Client credentials for an Azure App Registration.
+The application must have the SharePoint
+.I AllSites.Write
+application permission with admin consent granted.
+.br
+Recommended for automation and scheduled tasks.
+.TP
+.BR OFFICE365_USERNAME " and " OFFICE365_PASSWORD
+Office\~365 user credentials.
+Legacy auth may be blocked by Conditional Access policies in many tenants.
+.SS "Optional"
+.TP
+.B SHAREPOINT_LIBRARY
+Destination library or folder path inside the site.
+Takes precedence over the
+.I SharePoint/dest/folder
+argument.
+.SH EXIT STATUS
+.TP
+.B 0
+All files were uploaded successfully; one URL per file is printed to stdout.
+.TP
+.B 1
+An error occurred (no files matched, file unreadable, upload failed, missing
+configuration).  A diagnostic message is written to stderr.
+.SH EXAMPLES
+Upload all PDF files in
+.I /tmp/invoices/
+to the
+.I Documents/invoices
+folder using credentials from
+.IR /etc/file2sharepoint/.env :
+.PP
+.RS 4
+.EX
+file2sharepoint '/tmp/invoices/*.pdf' 'Documents/invoices' /etc/file2sharepoint/.env
+.EE
+.RE
+.PP
+Upload a single file using the default
+.I .env
+in the current directory:
+.PP
+.RS 4
+.EX
+file2sharepoint report.xlsx 'Shared Documents'
+.EE
+.RE
+.SH FILES
+.TP
+.I .env
+Default configuration file (project root).
+Created and populated by
+.BR azure-setup-wizard (1).
+.TP
+.I .env.example
+Template showing all supported variables (no real credentials).
+.SH SEE ALSO
+.BR azure-setup-wizard (1)
+.SH AUTHOR
+Vítězslav Dvořák <info@vitexsoftware.cz>
+.br
+.UR https://github.com/VitexSoftware/file2sharepoint
+.UE

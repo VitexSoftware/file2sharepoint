@@ -23,6 +23,10 @@ vendor: composer.json composer.lock ## Installs composer dependencies
 cs: ## Update Coding Standards
 	vendor/bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --diff --verbose
 
+.PHONY: setup-wizard
+setup-wizard: ## Run the Azure / SharePoint credentials setup wizard
+	bin/azure-setup-wizard
+
 buildimage:
 	docker build -f Containerfile  -t vitexsoftware/file2sharepoint:latest .
 

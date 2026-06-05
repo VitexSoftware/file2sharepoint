@@ -1,5 +1,6 @@
 
 bin/file2sharepoint usr/bin/
+bin/azure-setup-wizard usr/bin/
 src/file2sharepoint.php usr/lib/file2sharepoint/
 composer.json        usr/lib/file2sharepoint/
 debian/autoload.php  usr/lib/file2sharepoint/

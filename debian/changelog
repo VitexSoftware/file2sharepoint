@@ -1,3 +1,21 @@
+file2sharepoint (0.3.0) stable; urgency=medium
+
+  * Add bin/azure-setup-wizard: interactive wizard for Azure App Registration
+    setup with automatic az CLI integration, permission assignment and
+    client-secret generation
+  * Add man pages: file2sharepoint(1) and azure-setup-wizard(1) in docs/
+  * Add debian/file2sharepoint.manpages to install man pages into the package
+  * Install AppStream metainfo XML to /usr/share/metainfo/ so stock icon
+    is resolved by AppStream consumers
+  * Install SVG as hicolor scalable stock icon
+    io.github.vitexsoftware.file2sharepoint
+  * Add <releases> block to AppStream metainfo (fixes pedantic validation)
+  * Add make setup-wizard target
+  * Expand README with Setup section documenting the wizard
+  * Fix native_function_invocation CS: use \dirname in tests
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Thu, 05 Jun 2026 17:14:00 +0200
+
 file2sharepoint (0.2.0) stable; urgency=medium
 
   * Fix glob/file_get_contents return-value checks with proper stderr output

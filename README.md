@@ -22,6 +22,31 @@ Please use the .deb packages. The repository is availble:
     sudo apt install file2sharepoint
 ```
 
+Setup
+-----
+
+Run the interactive wizard to create an Azure App Registration and write a `.env` file:
+
+```shell
+    bin/azure-setup-wizard        # writes .env in the project root
+    bin/azure-setup-wizard /path/to/.env  # writes to a custom path
+    make setup-wizard             # shorthand via Makefile
+```
+
+The wizard will:
+1. Ask for the SharePoint **tenant**, **site**, and **library/folder**.
+2. Let you choose between *App registration* (Client ID + Secret, recommended
+   for automation) or *User credentials* (Username + Password).
+3. For App registration it optionally uses the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/)
+   to create the app, assign the `AllSites.Write` SharePoint application
+   permission, and generate a client secret automatically.
+4. Write the resulting credentials to the `.env` file (mode `600`).
+
+> **Required Azure permission for client-credentials mode**  
+> Resource: SharePoint (`00000003-0000-0ff1-ce00-000000000000`)  
+> Application role: `AllSites.Write`  
+> Admin consent must be granted by a Global Administrator.
+
 Usage
 -----
 

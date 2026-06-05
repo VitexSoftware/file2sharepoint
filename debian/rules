@@ -19,3 +19,4 @@ override_dh_install:
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//' `'"'  composer.json |sponge debian/file2sharepoint/usr/lib/file2sharepoint/composer.json
 	jq '.version = "'`dpkg-parsechangelog | sed -n 's/^Version: //p'| sed 's/~.*//'`'"'   multiflexi/file2sharepoint.app.json |sponge debian/multiflexi-file2sharepoint/usr/lib/file2sharepoint/multiflexi/file2sharepoint.app.json
 	install -D -m 0644 file2sharepoint.svg debian/file2sharepoint/usr/share/icons/hicolor/scalable/apps/io.github.vitexsoftware.file2sharepoint.svg
+	install -D -m 0644 debian/io.github.vitexsoftware.file2sharepoint.metainfo.xml debian/file2sharepoint/usr/share/metainfo/io.github.vitexsoftware.file2sharepoint.metainfo.xml

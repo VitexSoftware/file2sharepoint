@@ -1,131 +1,144 @@
 {
-    "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
-    "schemaVersion": "3.1.0",
-    "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
-    "name": {
-        "en": "file2sharepoint",
-        "cs": "file2sharepoint"
+  "$schema": "https://raw.githubusercontent.com/VitexSoftware/php-vitexsoftware-multiflexi-core/refs/heads/main/multiflexi.app.schema.json",
+  "schemaVersion": "3.4.0",
+  "uuid": "71892aa4-96db-4dbe-805b-0b7e6da3f36e",
+  "name": {
+    "en": "file2sharepoint",
+    "cs": "file2sharepoint"
+  },
+  "description": {
+    "en": "Uploads files to SharePoint from local storage.",
+    "cs": "Nahrává soubory do SharePointu z lokálního úložiště."
+  },
+  "tags": [
+    "File",
+    "Upload",
+    "Sharepoint",
+    "Office365"
+  ],
+  "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
+  "executable": "file2sharepoint",
+  "events": {
+    "consumes": {
+      "file.ready": {
+        "description": "A file is ready for upload",
+        "format": "file"
+      }
     },
-    "description": {
-        "en": "Uploads files to SharePoint from local storage.",
-        "cs": "Nahrává soubory do SharePointu z lokálního úložiště."
-    },
-    "tags": [
-        "File",
-        "Upload",
-        "Sharepoint",
-        "Office365"
-    ],
-    "homepage": "https://github.com/VitexSoftware/file2sharepoint/",
-    "executable": "file2sharepoint",
-    "environment": {
-        "OFFICE365_USERNAME": {
-            "type": "text",
-            "description": {
-                "en": "Office 365 username (user authentication)",
-                "cs": "Uživatelské jméno Office 365 (přihlášení uživatelem)"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Security"
-        },
-        "OFFICE365_PASSWORD": {
-            "type": "password",
-            "description": {
-                "en": "Office 365 password (user authentication)",
-                "cs": "Heslo Office 365 (přihlášení uživatelem)"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Security"
-        },
-        "OFFICE365_CLIENTID": {
-            "type": "text",
-            "description": {
-                "en": "Office 365 application Client ID (client credentials authentication)",
-                "cs": "ID klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Security"
-        },
-        "OFFICE365_CLSECRET": {
-            "type": "password",
-            "description": {
-                "en": "Office 365 application Client Secret (client credentials authentication)",
-                "cs": "Tajný klíč klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
-            },
-            "defval": "",
-            "required": false,
-            "category": "Security"
-        },
-        "OFFICE365_TENANT": {
-            "type": "text",
-            "description": {
-                "en": "Office 365 tenant name (e.g. yourcompany for yourcompany.sharepoint.com)",
-                "cs": "Název tenanta Office 365 (např. vasefirma pro vasefirma.sharepoint.com)"
-            },
-            "defval": "",
-            "required": true,
-            "category": "API"
-        },
-        "OFFICE365_SITE": {
-            "type": "text",
-            "description": {
-                "en": "SharePoint site name",
-                "cs": "Název webu SharePoint"
-            },
-            "defval": "",
-            "required": true,
-            "category": "API"
-        },
-        "SHAREPOINT_LIBRARY": {
-            "type": "text",
-            "description": {
-                "en": "Destination folder path in SharePoint (e.g. Shared documents/uploads)",
-                "cs": "Cílová složka v SharePointu (např. Sdílené dokumenty/nahráváni)"
-            },
-            "defval": "Documents",
-            "required": false,
-            "category": "API"
-        },
-        "APP_DEBUG": {
-            "type": "bool",
-            "description": {
-                "en": "Show debug messages",
-                "cs": "Zobrazit ladicí zprávy"
-            },
-            "defval": "false",
-            "required": false,
-            "category": "Behavior"
-        },
-        "EASE_LOGGER": {
-            "type": "string",
-            "description": {
-                "en": "Log output targets (e.g. console|syslog)",
-                "cs": "Cíle výstupu logu (např. console|syslog)"
-            },
-            "defval": "console|syslog",
-            "required": false,
-            "category": "Behavior"
-        }
-    },
-    "exitCodes": {
-        "0": {
-            "description": {
-                "en": "Success",
-                "cs": "Úspěch"
-            },
-            "severity": "success",
-            "retry": false
-        },
-        "1": {
-            "description": {
-                "en": "General error",
-                "cs": "Obecná chyba"
-            },
-            "severity": "error",
-            "retry": true
-        }
+    "emits": {
+      "file.uploaded": {
+        "description": "A file was uploaded to an external store"
+      }
     }
+  },
+  "environment": {
+    "OFFICE365_USERNAME": {
+      "type": "text",
+      "description": {
+        "en": "Office 365 username (user authentication)",
+        "cs": "Uživatelské jméno Office 365 (přihlášení uživatelem)"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Security"
+    },
+    "OFFICE365_PASSWORD": {
+      "type": "password",
+      "description": {
+        "en": "Office 365 password (user authentication)",
+        "cs": "Heslo Office 365 (přihlášení uživatelem)"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Security"
+    },
+    "OFFICE365_CLIENTID": {
+      "type": "text",
+      "description": {
+        "en": "Office 365 application Client ID (client credentials authentication)",
+        "cs": "ID klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Security"
+    },
+    "OFFICE365_CLSECRET": {
+      "type": "password",
+      "description": {
+        "en": "Office 365 application Client Secret (client credentials authentication)",
+        "cs": "Tajný klíč klienta aplikace Office 365 (přihlášení přes klientské přihlašovací údaje)"
+      },
+      "defval": "",
+      "required": false,
+      "category": "Security"
+    },
+    "OFFICE365_TENANT": {
+      "type": "text",
+      "description": {
+        "en": "Office 365 tenant name (e.g. yourcompany for yourcompany.sharepoint.com)",
+        "cs": "Název tenanta Office 365 (např. vasefirma pro vasefirma.sharepoint.com)"
+      },
+      "defval": "",
+      "required": true,
+      "category": "API"
+    },
+    "OFFICE365_SITE": {
+      "type": "text",
+      "description": {
+        "en": "SharePoint site name",
+        "cs": "Název webu SharePoint"
+      },
+      "defval": "",
+      "required": true,
+      "category": "API"
+    },
+    "SHAREPOINT_LIBRARY": {
+      "type": "text",
+      "description": {
+        "en": "Destination folder path in SharePoint (e.g. Shared documents/uploads)",
+        "cs": "Cílová složka v SharePointu (např. Sdílené dokumenty/nahráváni)"
+      },
+      "defval": "Documents",
+      "required": false,
+      "category": "API"
+    },
+    "APP_DEBUG": {
+      "type": "bool",
+      "description": {
+        "en": "Show debug messages",
+        "cs": "Zobrazit ladicí zprávy"
+      },
+      "defval": "false",
+      "required": false,
+      "category": "Behavior"
+    },
+    "EASE_LOGGER": {
+      "type": "string",
+      "description": {
+        "en": "Log output targets (e.g. console|syslog)",
+        "cs": "Cíle výstupu logu (např. console|syslog)"
+      },
+      "defval": "console|syslog",
+      "required": false,
+      "category": "Behavior"
+    }
+  },
+  "exitCodes": {
+    "0": {
+      "description": {
+        "en": "Success",
+        "cs": "Úspěch"
+      },
+      "severity": "success",
+      "retry": false
+    },
+    "1": {
+      "description": {
+        "en": "General error",
+        "cs": "Obecná chyba"
+      },
+      "severity": "error",
+      "retry": true
+    }
+  }
 }

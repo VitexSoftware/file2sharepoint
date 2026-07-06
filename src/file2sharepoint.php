@@ -16,9 +16,9 @@ declare(strict_types=1);
 require_once '../vendor/autoload.php';
 
 use Ease\Shared;
-use Office365\Runtime\Auth\ClientCredential;
 use Office365\Runtime\Auth\UserCredentials;
 use Office365\SharePoint\ClientContext;
+use VitexSoftware\File2SharePoint\EntraIdAppOnlyAuthenticationContext;
 
 \define('APP_NAME', 'file2sharepoint');
 
@@ -35,13 +35,32 @@ if ($argc === 1) {
         //        'SHAREPOINT_LIBRARY',
     ], \array_key_exists(3, $argv) ? $argv[3] : '../.env');
 
+    // Azure ACS (Office365\Runtime\Auth\ClientCredential + withCredentials())
+    // was fully retired by Microsoft for all tenants on 2026-04-02 - it still
+    // mints a syntactically valid token but SharePoint Online now rejects it
+    // on the real REST call regardless of credential correctness. The
+    // client-id/secret case therefore authenticates via the modern Entra ID
+    // v2 client_credentials flow instead; the user-credential flow is
+    // unaffected and unchanged.
     if (Shared::cfg('OFFICE365_USERNAME', false) && Shared::cfg('OFFICE365_PASSWORD', false)) {
         $credentials = new UserCredentials(Shared::cfg('OFFICE365_USERNAME'), Shared::cfg('OFFICE365_PASSWORD'));
+        $ctx = (new ClientContext('https://'.Shared::cfg('OFFICE365_TENANT').'.sharepoint.com/sites/'.Shared::cfg('OFFICE365_SITE')))->withCredentials($credentials);
+        $resetAuth = static function () use ($ctx, $credentials): void {
+            $ctx->withCredentials($credentials);
+        };
     } else {
-        $credentials = new ClientCredential(Shared::cfg('OFFICE365_CLIENTID'), Shared::cfg('OFFICE365_CLSECRET'));
+        $tenant = Shared::cfg('OFFICE365_TENANT');
+        $authCtx = new EntraIdAppOnlyAuthenticationContext(
+            $tenant,
+            Shared::cfg('OFFICE365_CLIENTID'),
+            Shared::cfg('OFFICE365_CLSECRET'),
+            'https://'.$tenant.'.sharepoint.com/.default',
+        );
+        $ctx = new ClientContext('https://'.$tenant.'.sharepoint.com/sites/'.Shared::cfg('OFFICE365_SITE'), $authCtx);
+        $resetAuth = static function () use ($authCtx): void {
+            $authCtx->forceRefresh();
+        };
     }
-
-    $ctx = (new ClientContext('https://'.Shared::cfg('OFFICE365_TENANT').'.sharepoint.com/sites/'.Shared::cfg('OFFICE365_SITE')))->withCredentials($credentials);
 
     //    $whoami = $ctx->getWeb()->getCurrentUser()->get()->executeQuery();
     //    print $whoami->getLoginName();
@@ -65,14 +84,28 @@ if ($argc === 1) {
             exit(1);
         }
 
-        $uploadFile = $targetFolder->uploadFile(\basename($filename), $contents);
+        $uploadFile = null;
 
-        try {
-            $ctx->executeQuery();
-        } catch (\Throwable $exc) {
-            \fwrite(\STDERR, $exc->getMessage().\PHP_EOL);
+        for ($attempt = 1; $attempt <= 2; ++$attempt) {
+            try {
+                $uploadFile = $targetFolder->uploadFile(\basename($filename), $contents);
+                $ctx->executeQuery();
 
-            exit(1);
+                break;
+            } catch (\Office365\Runtime\Http\RequestException $exc) {
+                if ($attempt >= 2) {
+                    \fwrite(\STDERR, $exc->getMessage().\PHP_EOL);
+
+                    exit(1);
+                }
+
+                sleep(2);
+                $resetAuth();
+            } catch (\Throwable $exc) {
+                \fwrite(\STDERR, $exc->getMessage().\PHP_EOL);
+
+                exit(1);
+            }
         }
 
         $fileUrl = $ctx->getBaseUrl().'/_layouts/15/download.aspx?SourceUrl='.\urlencode($uploadFile->getServerRelativeUrl());

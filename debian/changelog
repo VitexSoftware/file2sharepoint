@@ -1,3 +1,24 @@
+file2sharepoint (0.3.1) UNRELEASED; urgency=medium
+
+  * Add EntraIdAppOnlyAuthenticationContext: real Entra ID (Azure AD) v2
+    app-only client_credentials authentication for SharePoint, replacing
+    the Azure ACS app-only flow (Office365\Runtime\Auth\ClientCredential +
+    ClientContext::withCredentials()) Microsoft fully retired for all
+    tenants on 2026-04-02 (no extension possible, see
+    https://learn.microsoft.com/sharepoint/dev/sp-add-ins/retirement-announcement-for-azure-acs).
+    Confirmed empirically: ACS still issues a syntactically valid token, but
+    SharePoint Online now rejects it on the real REST call regardless of
+    credential correctness. The OFFICE365_USERNAME/OFFICE365_PASSWORD
+    user-credential flow is unaffected and unchanged. Uploads now retry
+    once on a transient auth failure.
+  * bin/azure-setup-wizard: assign the Microsoft Graph "Sites.Selected"
+    application permission and perform the per-site grant
+    (POST /sites/{siteId}/permissions) instead of the legacy SharePoint
+    "AllSites.Write" role, which relied on the same retired ACS model and
+    no longer grants working access even when assigned and consented.
+
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 06 Jul 2026 12:00:00 +0200
+
 file2sharepoint (0.3.0) stable; urgency=medium
 
   * Add bin/azure-setup-wizard: interactive wizard for Azure App Registration

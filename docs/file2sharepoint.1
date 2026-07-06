@@ -57,9 +57,14 @@ Name of the SharePoint site collection.
 .TP
 .BR OFFICE365_CLIENTID " and " OFFICE365_CLSECRET
 Client credentials for an Azure App Registration.
-The application must have the SharePoint
-.I AllSites.Write
-application permission with admin consent granted.
+The application must have the Microsoft Graph
+.I Sites.Selected
+application permission with admin consent granted, and must be granted
+access to the target site via
+.BR "POST /sites/{siteId}/permissions" .
+Authenticates via the Entra ID v2
+.I client_credentials
+flow, not the retired Azure ACS app-only flow.
 .br
 Recommended for automation and scheduled tasks.
 .TP

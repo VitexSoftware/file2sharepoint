@@ -182,22 +182,29 @@ setup_app_registration() {
         ok "Service principal created"
     fi
 
-    # ── SharePoint permissions ────────────────────────────────
-    # Resource: SharePoint  = 00000003-0000-0ff1-ce00-000000000000
-    # Role:     AllSites.Write application permission
-    #           ID: 1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9
-    SP_RESOURCE_ID="00000003-0000-0ff1-ce00-000000000000"
-    SP_ALLSITES_WRITE="1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9"
+    # ── Microsoft Graph permission ─────────────────────────────
+    # Microsoft fully retired the classic "SharePoint" API's app-only
+    # permission model (the AllSites.Write Role this used to request here,
+    # under resource 00000003-0000-0ff1-ce00-000000000000) on 2026-04-02 -
+    # it relied on Azure ACS token issuance, and SharePoint Online now
+    # rejects that permission model's tokens on the real REST call
+    # regardless of credential correctness, even when a token is still
+    # syntactically issued. Confirmed by hand: SharePoint responds
+    # "Unsupported app only token." even with a valid Entra ID v2 token and
+    # AllSites.Write assigned this way.
+    #
+    # The supported replacement is the Microsoft Graph "Sites.Selected"
+    # application permission plus an explicit, per-site grant via Graph
+    # (POST /sites/{siteId}/permissions) - see
+    # https://learn.microsoft.com/sharepoint/dev/sp-add-ins/retirement-announcement-for-azure-acs
+    GRAPH_RESOURCE_ID="00000003-0000-0000-c000-000000000000"
+    GRAPH_SITES_SELECTED="883ea226-0bf2-4a8f-9f9d-92c9162a727d"
 
-    # Optional: also request Files.ReadWrite.All via MS Graph
-    # Graph resource:  00000003-0000-0000-c000-000000000000
-    # Files.ReadWrite.All application: 75359482-378d-4052-8f01-80520e7db3cd
-
-    info "Adding SharePoint 'AllSites.Write' application permission …"
+    info "Adding Microsoft Graph 'Sites.Selected' application permission …"
     az ad app permission add \
         --id "${APP_ID}" \
-        --api "${SP_RESOURCE_ID}" \
-        --api-permissions "${SP_ALLSITES_WRITE}=Role" \
+        --api "${GRAPH_RESOURCE_ID}" \
+        --api-permissions "${GRAPH_SITES_SELECTED}=Role" \
         --output none 2>/dev/null || warn "Permission may already be assigned — continuing."
     ok "Permission added"
 
@@ -212,6 +219,44 @@ setup_app_registration() {
         echo "  https://portal.azure.com/#view/Microsoft_AAD_RegisteredApps/ApplicationMenuBlade/~/CallAnAPI/appId/${APP_ID}"
         echo
         read -rp "  Press Enter once admin consent has been granted …"
+    fi
+
+    # ── Per-site grant via Graph ────────────────────────────────
+    # Sites.Selected only opens the *door* - the app still has access to no
+    # site until explicitly granted one. This uses the wizard operator's own
+    # az login session (needs at least Sites.FullControl.All delegated
+    # access on the target site, e.g. SharePoint/Global admin), not the
+    # app's own credentials.
+    info "Looking up SharePoint site ${OFFICE365_TENANT}.sharepoint.com/sites/${OFFICE365_SITE} …"
+    SITE_GRAPH_ID=$(az rest --method get \
+        --url "https://graph.microsoft.com/v1.0/sites/${OFFICE365_TENANT}.sharepoint.com:/sites/${OFFICE365_SITE}" \
+        --query id -o tsv 2>/dev/null || true)
+
+    if [[ -z "${SITE_GRAPH_ID}" || "${SITE_GRAPH_ID}" == "None" ]]; then
+        warn "Could not resolve the site via Graph - grant access manually:"
+        echo
+        echo "  POST https://graph.microsoft.com/v1.0/sites/{siteId}/permissions"
+        echo '  { "roles": ["write"], "grantedToIdentities": [ { "application": {'
+        echo "      \"id\": \"${APP_ID}\", \"displayName\": \"${APP_DISPLAY_NAME}\" } } ] }"
+        echo
+    else
+        info "Granting the app 'write' access to this site via Graph …"
+        GRANT_BODY=$(printf '{"roles":["write"],"grantedToIdentities":[{"application":{"id":"%s","displayName":"%s"}}]}' \
+            "${APP_ID}" "${APP_DISPLAY_NAME}")
+        if az rest --method post \
+            --url "https://graph.microsoft.com/v1.0/sites/${SITE_GRAPH_ID}/permissions" \
+            --body "${GRANT_BODY}" \
+            --headers "Content-Type=application/json" \
+            --output none 2>/dev/null; then
+            ok "Site permission granted"
+        else
+            warn "Could not grant the site permission automatically - grant it manually:"
+            echo
+            echo "  POST https://graph.microsoft.com/v1.0/sites/${SITE_GRAPH_ID}/permissions"
+            echo "  ${GRANT_BODY}"
+            echo
+            read -rp "  Press Enter once the site permission has been granted …"
+        fi
     fi
 
     # ── Create client secret ───────────────────────────────────
@@ -287,9 +332,12 @@ else
         header "Manual Client Credentials"
         info "Enter the credentials from an existing Azure App Registration."
         echo
-        echo "  Required SharePoint application permission:"
-        echo "    Resource : SharePoint  (00000003-0000-0ff1-ce00-000000000000)"
-        echo "    Role     : AllSites.Write"
+        echo "  Required Microsoft Graph application permission:"
+        echo "    Resource : Microsoft Graph  (00000003-0000-0000-c000-000000000000)"
+        echo "    Role     : Sites.Selected"
+        echo "  Plus a per-site grant (POST /sites/{siteId}/permissions) - the"
+        echo "  legacy SharePoint 'AllSites.Write' role no longer works: Microsoft"
+        echo "  retired Azure ACS app-only auth for all tenants on 2026-04-02."
         echo
         prompt        OFFICE365_CLIENTID "Client ID (Application ID)"  "${DEF_CLIENTID}"
         prompt_secret OFFICE365_CLSECRET "Client Secret"

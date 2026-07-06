@@ -19,14 +19,27 @@ wizard automates the full Azure App Registration process:
 .IP \(bu 4
 Creates an Azure AD Application and Service Principal.
 .IP \(bu 4
-Assigns the SharePoint
-.I AllSites.Write
+Assigns the Microsoft Graph
+.I Sites.Selected
 application permission
-.RB ( 00000003-0000-0ff1-ce00-000000000000 ).
+.RB ( 00000003-0000-0000-c000-000000000000 ).
 .IP \(bu 4
 Attempts to grant tenant-wide admin consent (requires Global Administrator).
 .IP \(bu 4
+Grants the app access to the specific target site via
+.B "POST /sites/{siteId}/permissions"
+using the operator's own signed-in Graph session.
+.IP \(bu 4
 Generates a client secret (valid for 2 years).
+.PP
+This replaces the legacy SharePoint
+.I AllSites.Write
+application permission (classic API resource
+.IR 00000003-0000-0ff1-ce00-000000000000 ):
+Microsoft fully retired Azure ACS app-only authentication for all tenants on
+2026-04-02, and SharePoint Online now rejects tokens obtained under that
+permission model on the real REST call regardless of credential
+correctness, even though a token may still be issued.
 .PP
 If
 .B az
@@ -121,10 +134,11 @@ file (created if one already exists).
 .SH REQUIRED AZURE PERMISSION
 .TS
 l l.
-Resource	SharePoint (00000003-0000-0ff1-ce00-000000000000)
-Role	AllSites.Write (1bfefb4e-e0b5-418b-a88f-73c46d2cc8e9)
+Resource	Microsoft Graph (00000003-0000-0000-c000-000000000000)
+Role	Sites.Selected (883ea226-0bf2-4a8f-9f9d-92c9162a727d)
 Type	Application (not Delegated)
 Consent	Tenant-wide admin consent required
+Site grant	POST /sites/{siteId}/permissions (per target site)
 .TE
 .SH EXAMPLES
 Run the wizard and write credentials to the default project

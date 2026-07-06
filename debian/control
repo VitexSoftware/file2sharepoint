@@ -18,6 +18,6 @@ Description: Simple Sharepoint file uploader
 
 Package: multiflexi-file2sharepoint
 Architecture: all
-Depends: ${misc:Depends}, file2sharepoint, multiflexi-cli
+Depends: ${misc:Depends}, file2sharepoint, multiflexi-cli, multiflexi-microsoft365
 Description: add file2sharepoint to MultiFlexi
  Allow use of file2sharepoint in MultiFlexi environment

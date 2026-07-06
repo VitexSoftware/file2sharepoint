@@ -16,8 +16,26 @@ file2sharepoint (0.3.1) UNRELEASED; urgency=medium
     (POST /sites/{siteId}/permissions) instead of the legacy SharePoint
     "AllSites.Write" role, which relied on the same retired ACS model and
     no longer grants working access even when assigned and consented.
+  * Migrate the upload itself, for the client-id/secret (app-only) case,
+    from classic SharePoint REST (\Office365\SharePoint\ClientContext/
+    Folder) to Microsoft Graph's drive API (new GraphSharePointClient,
+    GraphApiException). Switching only the token source to Entra ID v2
+    (above) was not enough: classic SharePoint REST checks the token's
+    appidacr claim and requires appidacr=2 (certificate-based app-only
+    auth) - a client_credentials token obtained with a client *secret*
+    always has appidacr=1 and is unconditionally rejected with
+    "Unsupported app only token.", regardless of Sites.Selected
+    permissions granted. Confirmed empirically: the exact same
+    token/app/site that gets HTTP 200 from Microsoft Graph gets HTTP 401
+    from _api/web/title. See
+    https://techcommunity.microsoft.com/blog/microsoftmissioncriticalblog/avoiding-access-errors-with-sharepoint-app-only-access/4459761
+    The OFFICE365_USERNAME/OFFICE365_PASSWORD user-credential flow is
+    unaffected and keeps using classic REST. The uploaded file's reported
+    URL for the app-only case now uses Microsoft Graph's driveItem
+    `webUrl` rather than the classic .../download.aspx?SourceUrl=... link
+    - both are valid direct links to the file.
 
- -- Vítězslav Dvořák <info@vitexsoftware.cz>  Mon, 06 Jul 2026 12:00:00 +0200
+ -- Vítězslav Dvořák <info@vitexsoftware.cz>  Tue, 07 Jul 2026 09:00:00 +0200
 
 file2sharepoint (0.3.0) stable; urgency=medium
 

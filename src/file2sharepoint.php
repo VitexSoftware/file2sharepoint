@@ -89,8 +89,21 @@ if ($argc === 1) {
         );
         $graph = new GraphSharePointClient($tenant, Shared::cfg('OFFICE365_SITE'), $authCtx);
 
-        $doUpload = static function (string $filename, string $contents) use ($graph, $path): string {
-            return (string) $graph->uploadFile($path, \basename($filename), $contents)['webUrl'];
+        // By default the returned link is a permanent sharing link (createLink)
+        // rather than the upload response's `webUrl`, which is path-based and
+        // goes stale once the file is moved or renamed.
+        $permanentLink = Shared::cfg('SHAREPOINT_PERMANENT_LINK', 'true') !== 'false';
+        $linkType = Shared::cfg('SHAREPOINT_LINK_TYPE', 'view');
+        $linkScope = Shared::cfg('SHAREPOINT_LINK_SCOPE', 'organization');
+
+        $doUpload = static function (string $filename, string $contents) use ($graph, $path, $permanentLink, $linkType, $linkScope): string {
+            $uploaded = $graph->uploadFile($path, \basename($filename), $contents);
+
+            if ($permanentLink) {
+                return $graph->createShareLink((string) $uploaded['id'], $linkType, $linkScope);
+            }
+
+            return (string) $uploaded['webUrl'];
         };
     }
 

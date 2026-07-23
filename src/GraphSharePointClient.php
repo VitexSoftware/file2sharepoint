@@ -39,7 +39,7 @@ namespace VitexSoftware\File2SharePoint;
  * "Sites.Selected" application permission (admin-consented) and an explicit
  * grant on the target site via `POST /sites/{siteId}/permissions`.
  */
-final class GraphSharePointClient
+class GraphSharePointClient
 {
     private ?string $siteId = null;
 
@@ -101,7 +101,31 @@ final class GraphSharePointClient
         return implode('/', array_map('rawurlencode', $segments));
     }
 
-    private function request(string $method, string $url, ?string $body = null, ?string $contentType = null, bool $retried = false): string
+    /**
+     * Create a sharing link for an uploaded item that stays valid across
+     * moves/renames (unlike the path-based `webUrl` returned by uploadFile()).
+     *
+     * @see https://learn.microsoft.com/en-us/graph/api/driveitem-createlink
+     */
+    public function createShareLink(string $itemId, string $type = 'view', string $scope = 'organization'): string
+    {
+        $url = \sprintf(
+            'https://graph.microsoft.com/v1.0/sites/%s/drive/items/%s/createLink',
+            $this->siteId(),
+            rawurlencode($itemId),
+        );
+
+        $body = json_encode(['type' => $type, 'scope' => $scope], \JSON_THROW_ON_ERROR);
+        $decoded = (array) json_decode($this->request('POST', $url, $body, 'application/json'), true);
+
+        return (string) $decoded['link']['webUrl'];
+    }
+
+    /**
+     * @internal protected (rather than private) so tests can override it with
+     *           an anonymous subclass instead of stubbing curl_init()
+     */
+    protected function request(string $method, string $url, ?string $body = null, ?string $contentType = null, bool $retried = false): string
     {
         $headers = ['Authorization: Bearer '.$this->authContext->getBearerToken()];
 

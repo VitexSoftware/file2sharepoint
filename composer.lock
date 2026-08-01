@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "261cf60a093b804671d73887e4d6e259",
+    "content-hash": "9f7a16e4a2ecaa5c64ac77b2bb823d06",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -421,16 +421,16 @@
         },
         {
             "name": "vitexsoftware/ease-core",
-            "version": "v1.50.1",
+            "version": "v1.50.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/VitexSoftware/php-ease-core.git",
-                "reference": "77f160db1e838a3b895dedb3af8597d8673efe0c"
+                "reference": "c57751a1af84f629874f6bf1aa532116a84924fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/77f160db1e838a3b895dedb3af8597d8673efe0c",
-                "reference": "77f160db1e838a3b895dedb3af8597d8673efe0c",
+                "url": "https://api.github.com/repos/VitexSoftware/php-ease-core/zipball/c57751a1af84f629874f6bf1aa532116a84924fa",
+                "reference": "c57751a1af84f629874f6bf1aa532116a84924fa",
                 "shasum": ""
             },
             "require": {
@@ -444,12 +444,12 @@
                 "vitexsoftware/ease-framework": "*"
             },
             "require-dev": {
-                "ergebnis/composer-normalize": "^2.48",
-                "ergebnis/php-cs-fixer-config": "^6.58",
+                "ergebnis/composer-normalize": "^2.50",
+                "ergebnis/php-cs-fixer-config": "^6.63",
                 "friendsofphp/php-cs-fixer": "^3.92",
                 "phpstan/phpstan": "*",
                 "phpunit/phpunit": "*",
-                "rector/rector": "^2.3",
+                "rector/rector": "^2.5",
                 "roave/security-advisories": "dev-latest"
             },
             "type": "library",
@@ -474,7 +474,7 @@
             "homepage": "http://v.s.cz/ease.php",
             "support": {
                 "issues": "https://github.com/VitexSoftware/php-ease-core/issues",
-                "source": "https://github.com/VitexSoftware/php-ease-core/tree/v1.50.1"
+                "source": "https://github.com/VitexSoftware/php-ease-core/tree/v1.50.2"
             },
             "funding": [
                 {
@@ -482,7 +482,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2026-02-04T09:03:54+00:00"
+            "time": "2026-07-20T15:34:43+00:00"
         }
     ],
     "packages-dev": [
